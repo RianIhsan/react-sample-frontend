@@ -5,7 +5,7 @@ const Navbar = (props) => {
   const logout = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/logout",
+        "https://react-go-jwt.netlify.app/api/logout",
         {},
         {
           headers: {
