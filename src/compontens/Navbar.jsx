@@ -2,6 +2,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = (props) => {
+  const navigate = useNavigate();
   const logout = async () => {
     try {
       const res = await axios.post(
@@ -15,6 +16,8 @@ const Navbar = (props) => {
         }
       );
       props.setName("");
+      console.log(res.data.message);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
