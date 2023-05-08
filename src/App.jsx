@@ -12,12 +12,15 @@ const App = () => {
   useEffect(() => {
     const getName = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/user/`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://go-sample-backend-production.up.railway.app/api/user/`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
         console.log(res.data.user);
         setName(res.data.user.name);
       } catch (error) {

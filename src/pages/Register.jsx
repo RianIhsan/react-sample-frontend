@@ -13,7 +13,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/register",
+        "https://go-sample-backend-production.up.railway.app/api/register",
         {
           name: nama,
           email: email,
