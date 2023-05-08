@@ -7,7 +7,7 @@ const Navbar = (props) => {
   e.preventDefault();
     try {
       const res = await axios.post(
-        "https://react-go-jwt.netlify.app/api/logout",
+        "https://go-sample-backend-production.up.railway.app/api/logout",
         {},
         {
           headers: {
