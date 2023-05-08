@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
-  const logout = async () => {
+  const logout = async (e) => {
+  e.preventDefault();
     try {
       const res = await axios.post(
         "https://react-go-jwt.netlify.app/api/logout",
