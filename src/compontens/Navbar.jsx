@@ -16,7 +16,7 @@ const Navbar = (props) => {
       );
       const response = await res.data.user.name;
       console.log(res.data.user.name);
-      props.setName("");
+      props.setName(response);
     } catch (error) {
       console.log(error);
     }
