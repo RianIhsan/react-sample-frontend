@@ -10,28 +10,27 @@ const Login = (props) => {
 
   const navigate = useNavigate();
 
-  useEffect(async () => {
+useEffect(async () => {
+  try {
     const token = localStorage.getItem("jwtToken");
 
     if (token) {
-      axios
-        .get("https://go-sample-backend-production.up.railway.app/api/verify", {
-          headers: {
-            Authorization: "Bearer ${token}",
-          },
-        })
-        .then((response) => {
-          const userData = response.data.user;
-          console.log("user data:", userData);
-        })
-        .catch((error) => {
-          console.log("Token verification failed:", error);
-          localStorage.removeItem("jwtToken");
-        });
+      const response = await axios.get("https://go-sample-backend-production.up.railway.app/api/verify", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const userData = response.data.user;
+      console.log("user data:", userData);
     } else {
       console.log("User is not logged in");
     }
-  }, []);
+  } catch (error) {
+    console.log("Token verification failed:", error);
+    localStorage.removeItem("jwtToken");
+  }
+}, []);
+
 
   const submit = async (e) => {
     e.preventDefault();
