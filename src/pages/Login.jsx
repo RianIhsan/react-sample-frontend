@@ -14,7 +14,7 @@ const Login = (props) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://react-go-jwt.netlify.app/api/login",
+        "https://go-sample-backend-production.up.railway.app/api/login",
         {
           email: email,
           password: pass,
