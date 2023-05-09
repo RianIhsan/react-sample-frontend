@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Login = (props) => {
@@ -9,6 +9,29 @@ const Login = (props) => {
   const [err, setErr] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(async () => {
+    const token = localStorage.getItem("jwtToken");
+
+    if (token) {
+      axios
+        .get("https://go-sample-backend-production.up.railway.app/api/verify", {
+          headers: {
+            Authorization: "Bearer ${token}",
+          },
+        })
+        .then((response) => {
+          const userData = response.data.user;
+          console.log("user data:", userData);
+        })
+        .catch((error) => {
+          console.log("Token verification failed:", error);
+          localStorage.removeItem("jwtToken");
+        });
+    } else {
+      console.log("User is not logged in");
+    }
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -30,6 +53,9 @@ const Login = (props) => {
           }),
         }
       );
+
+      const token = response.data.token.value;
+      localStorage.setItem("jwtToken", token);
 
       const res = await response.data.user.name;
 
