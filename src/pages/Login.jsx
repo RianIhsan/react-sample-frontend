@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const Login = (props) => {
@@ -10,33 +10,11 @@ const Login = (props) => {
 
   const navigate = useNavigate();
 
-useEffect(async () => {
-  try {
-    const token = localStorage.getItem("jwtToken");
-
-    if (token) {
-      const response = await axios.get("https://go-sample-backend-production.up.railway.app/api/verify", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const userData = response.data.user;
-      console.log("user data:", userData);
-    } else {
-      console.log("User is not logged in");
-    }
-  } catch (error) {
-    console.log("Token verification failed:", error);
-    localStorage.removeItem("jwtToken");
-  }
-}, []);
-
-
   const submit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://go-sample-backend-production.up.railway.app/api/login",
+        "http://localhost:3000/api/login",
         {
           email: email,
           password: pass,
@@ -52,10 +30,9 @@ useEffect(async () => {
           }),
         }
       );
-
       const token = response.data.token.value;
-      localStorage.setItem("jwtToken", token);
-
+      localStorage.setItem('jwtToken', token);
+      
       const res = await response.data.user.name;
 
       console.log(response.data.user.name);
