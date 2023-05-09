@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
-  const logout = async (e) => {
-  e.preventDefault();
+  const logout = async () => {
     try {
       const res = await axios.post(
         "https://go-sample-backend-production.up.railway.app/api/logout",
